@@ -1,0 +1,51 @@
+### Login — dapatkan token
+
+@baseUrl = https://sispembuku.test
+@token = 4|WJC7FQijrfwR77urZnY5aMlw3JnLUHAajHZ6561Uf7d5f9c1
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "password"
+}
+
+###
+
+### Get all bukus dengan FILTERING, SORTING, & FIELD SELECTION
+GET {{baseUrl}}/api/admin/bukus
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Get bukus dengan sorting descending by created_at
+GET {{baseUrl}}/api/admin/bukus?sort=-created_at
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Get bukus with field selection (hanya id dan judul)
+GET {{baseUrl}}/api/admin/bukus?fields=id,judul
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Filter buku berdasarkan author
+GET {{baseUrl}}/api/admin/bukus?filter[author_id]=1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Kombinasi: Filter + Sort + Fields
+GET {{baseUrl}}/api/admin/bukus?filter[author_id]=1&sort=judul&fields=id,judul,kuantitas
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/admin/bukus
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "judul": "Pemrograman Laravel",
+  "isbn": "21313",
+  "author_id": 1,
+  "kuantitas": 5
+}
